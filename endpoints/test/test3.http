@@ -1,0 +1,122 @@
+###
+//list users of database (Standard Admin ..)
+GET https://localhost:443/publicUser
+
+
+//Login mit Basic authentication mit korrektem Credentials admin:123
+###
+POST https://localhost:443/authenticate/
+Authorization: Basic YWRtaW46MTIz
+
+
+// Login mit Basic Authentication mit falschem Credentials
+###
+POST https://localhost:443/authenticate/
+Authorization: Basic manfred:123
+
+//list all Users without Token (should give an error)
+###
+GET https://localhost:443/user/
+
+//list all users with token(admin)
+###
+GET https://localhost:443/user/
+Authorization: Bearer 
+
+
+// List all threads(Forum) without token
+###
+GET https://localhost:443/forum/
+
+
+//Create Forum as Admin
+###
+POST https://localhost:443/forum/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MThiYWFiNzk1NGJmMmU1MWJmMzRhNjMiLCJ1c2VySUQiOiJhZG1pbiIsImlhdCI6MTYzNjYyNDg1OX0.uahqCD7WHP3XFiF0GV_1WlsKthr5YRqN3F8Pn2dV_RI
+Content-Type: application/json
+
+{
+    "forumName": "Mein erstes Forum",
+    "forumDescription": "Das ist ein erstes Forum, das ich im Rahmen der Tests angelegt habe."
+}
+
+
+//list all threads(Forum)
+###
+https://localhost:443/forum/
+
+
+
+//Change forumDescription with Authentication
+###
+PUT https://localhost:443/forum/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MThiYWFiNzk1NGJmMmU1MWJmMzRhNjMiLCJ1c2VySUQiOiJhZG1pbiIsImlhdCI6MTYzNjYyNDg1OX0.uahqCD7WHP3XFiF0GV_1WlsKthr5YRqN3F8Pn2dV_RI
+Content-Type: application/json
+
+{
+    "_id": "ForumID",
+    "forumDescription": "Das ist der neue Text."
+}
+
+###
+https://localhost:443/forum/getByOwnerID
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MThiYWFiNzk1NGJmMmU1MWJmMzRhNjMiLCJ1c2VySUQiOiJhZG1pbiIsImlhdCI6MTYzNjYyNDg1OX0.uahqCD7WHP3XFiF0GV_1WlsKthr5YRqN3F8Pn2dV_RI
+
+### list thread from user manfred (if exist) but only admin has access
+POST https://localhost:443/forum/getByOwnerID
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIzOGNhYzUxNjFjNjdlMzM0OTA3YmMiLCJ1c2VySUQiOiJhZG1pbiIsInVzZXJOYW1lIjoiYWRtaW4iLCJpc0FkbWluaXN0cmF0b3IiOnRydWUsImlhdCI6MTY0MDY4MDM0OSwiZXhwIjoxNjQzMjcyMzQ5fQ.4DAOoqM6F17GNbyWg5G6jwnW9RCyRS99OnUfiPygWB4
+Content-Type: application/json
+
+{
+    "ownerID" : "manfred"
+}
+
+###
+POST https://localhost:443/forumMessage/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MThiYWFiNzk1NGJmMmU1MWJmMzRhNjMiLCJ1c2VySUQiOiJhZG1pbiIsImlhdCI6MTYzNjYyNDg1OX0.uahqCD7WHP3XFiF0GV_1WlsKthr5YRqN3F8Pn2dV_RI
+Content-Type: application/json
+
+{
+    "forumID": "61b892c383af6eecd758346e",
+    "messageText": "First Kommentar"
+
+}
+
+###
+GET https://localhost:443/forumMessage/
+
+###
+PUT https://localhost:443/forumMessage/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MThiYWFiNzk1NGJmMmU1MWJmMzRhNjMiLCJ1c2VySUQiOiJhZG1pbiIsImlhdCI6MTYzNjYyNDg1OX0.uahqCD7WHP3XFiF0GV_1WlsKthr5YRqN3F8Pn2dV_RI
+Content-Type: application/json
+id: 61db3e98f82a47d1ab034bbf
+
+{
+    
+    "messageText": "Neue Message Text"
+
+}
+
+###
+POST https://localhost:443/forumMessage/getByMessageID
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWQ4ZDU0Njc4MzgyNGY1ZTdkYzY5ZDciLCJ1c2VySUQiOiJtYW5mcmVkIiwidXNlck5hbWUiOiJtYW5mcmVkIiwiaWF0IjoxNjQxNzcwMTU2LCJleHAiOjE2NDQzNjIxNTZ9.nzF0zguS0pAW7slmrls4J2V7Mqc3BMfcce4wof97VZc
+Content-Type: application/json
+
+{
+    "ownerID" : "admin"
+}
+
+###
+POST https://localhost:443/forumMessage/getByMessageID
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWQ4ZDU0Njc4MzgyNGY1ZTdkYzY5ZDciLCJ1c2VySUQiOiJtYW5mcmVkIiwidXNlck5hbWUiOiJtYW5mcmVkIiwiaWF0IjoxNjQxNzcwMTU2LCJleHAiOjE2NDQzNjIxNTZ9.nzF0zguS0pAW7slmrls4J2V7Mqc3BMfcce4wof97VZc
+
+###
+DELETE https://localhost:443/forumMessage/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWQ4ZDU0Njc4MzgyNGY1ZTdkYzY5ZDciLCJ1c2VySUQiOiJtYW5mcmVkIiwidXNlck5hbWUiOiJtYW5mcmVkIiwiaWF0IjoxNjQxNzcwMTU2LCJleHAiOjE2NDQzNjIxNTZ9.nzF0zguS0pAW7slmrls4J2V7Mqc3BMfcce4wof97VZc
+Content-Type: application/json
+id: 61dc502ea72f03a3f5247f05
+
+
+
+
+

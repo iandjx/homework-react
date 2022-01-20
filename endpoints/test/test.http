@@ -1,0 +1,50 @@
+// Request all user
+###
+http://localhost:8080/publicUser
+
+//User register
+###
+POST http://localhost:8080/publicUser/
+Content-Type: application/json
+
+{
+    "userID": "admin",
+    "userName": "admin",
+    "password": "123",
+    "isAdministrator": true
+}
+
+
+//request user admin
+###
+GET http://localhost:8080/publicUser/getByUserID
+Content-Type: application/json
+
+{
+    "userID": "admin"
+}
+
+//second user register
+###
+POST http://localhost:8080/publicUser/
+Content-Type: application/json
+
+{
+    "userID": "manfred",
+    "userName": "Manfred Mustermann",
+    "password": "123"
+}
+
+//change the name of user 2
+###
+PUT http://localhost:8080/publicUser/
+Content-Type: application/json
+
+{
+    "userID": "manfred",
+    "userName": "Manfred Müller"
+}
+
+// request all user
+###
+http://localhost:8080/publicUser

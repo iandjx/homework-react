@@ -1,0 +1,128 @@
+###
+//list users of database (Standard Admin ..)
+GET http://localhost:8080/publicUser
+
+
+
+###
+POST http://localhost:8080/authenticate/
+Content-Type: application/json
+
+{
+    "userID": "admin",
+    "password": "123"
+}
+
+###
+POST http://localhost:8080/user/
+Content-Type: application/json
+
+{
+    "userID": "admin",
+    "password": "123"
+}
+
+//Login mit Basic authentication mit korrektem Credentials admin:123
+###
+POST http://localhost:8080/authenticate/
+Authorization: Basic YWRtaW46MTIz
+
+
+// Login mit Basic Authentication mit falschem Credentials
+###
+POST http://localhost:8080/authenticate/
+Authorization: Basic admin:123
+
+
+###
+DELETE http://localhost:8080/user/61dd8e2e9dddda1628299723
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIzOGNhYzUxNjFjNjdlMzM0OTA3YmMiLCJ1c2VySUQiOiJhZG1pbiIsInVzZXJOYW1lIjoiYWRtaW4iLCJpc0FkbWluaXN0cmF0b3IiOnRydWUsImlhdCI6MTY0MDY4MDM0OSwiZXhwIjoxNjQzMjcyMzQ5fQ.4DAOoqM6F17GNbyWg5G6jwnW9RCyRS99OnUfiPygWB4
+
+
+//list all Users without Token (should give an error)
+###
+GET http://localhost:8080/user/
+
+//list all users with token(admin)
+###
+GET http://localhost:8080/user/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIzOGNhYzUxNjFjNjdlMzM0OTA3YmMiLCJ1c2VySUQiOiJhZG1pbiIsInVzZXJOYW1lIjoiYWRtaW4iLCJpc0FkbWluaXN0cmF0b3IiOnRydWUsImlhdCI6MTY0MDY4MDM0OSwiZXhwIjoxNjQzMjcyMzQ5fQ.4DAOoqM6F17GNbyWg5G6jwnW9RCyRS99OnUfiPygWB4
+
+###
+PUT http://localhost:8080/user/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIzOGNhYzUxNjFjNjdlMzM0OTA3YmMiLCJ1c2VySUQiOiJhZG1pbiIsInVzZXJOYW1lIjoiYWRtaW4iLCJpc0FkbWluaXN0cmF0b3IiOnRydWUsImlhdCI6MTY0MTMzODU4MywiZXhwIjoxNjQzOTMwNTgzfQ.0DWqhN_AkJ6cx1TauNPKOjD8Uq-XXXFdBdaOm7NBwJA
+Content-Type: application/json
+
+{
+
+     "userID": "manfred",
+    "userName": "manfred12",
+   "password": "123"
+    
+    
+
+}
+
+
+// List all threads(Forum) without token
+###
+GET http://localhost:8080/forum/
+
+###
+DELETE http://localhost:8080/forum/61e55d8f4308c3e402dacda2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWU1NWNjZjQzMDhjM2U0MDJkYWNkODQiLCJ1c2VySUQiOiJ0ZXN0dXNlciIsInVzZXJOYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE2NDI1MTI5NTksImV4cCI6MTY0NTEwNDk1OX0.ADHnCREQjYkmi_4tWxmCJw3l58b6jbXBHPZGJa4f0uA
+
+###
+DELETE http://localhost:8080/forumMessage/61e55cdc4308c3e402dacd8d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWU1NWNjZjQzMDhjM2U0MDJkYWNkODQiLCJ1c2VySUQiOiJ0ZXN0dXNlciIsInVzZXJOYW1lIjoidGVzdHVzZXIiLCJpYXQiOjE2NDI1MTI5NTksImV4cCI6MTY0NTEwNDk1OX0.ADHnCREQjYkmi_4tWxmCJw3l58b6jbXBHPZGJa4f0uA
+
+//Create Forum as 
+###
+POST http://localhost:8080/forum/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIzOGNhYzUxNjFjNjdlMzM0OTA3YmMiLCJ1c2VySUQiOiJhZG1pbiIsInVzZXJOYW1lIjoiYWRtaW4iLCJpc0FkbWluaXN0cmF0b3IiOnRydWUsImlhdCI6MTY0MTMzODU4MywiZXhwIjoxNjQzOTMwNTgzfQ.0DWqhN_AkJ6cx1TauNPKOjD8Uq-XXXFdBdaOm7NBwJA
+Content-Type: application/json
+
+{
+    "forumName": "testtest23",
+    "forumDescription": "testing."
+}
+
+
+//list all threads(Forum)
+###
+http://localhost:8080/forum/
+
+###
+PUT http://localhost:8080/forum/
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "userName": "userName",
+    "forumDescription": "Das ist der neue Text."
+}
+
+//Change forumDescription with Authentication
+###
+PUT http://localhost:8080/forum/
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "_id": "",
+    "forumDescription": "Das ist der neue Text."
+}
+
+###
+GET http://localhost:8080/forum/getByToken
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIzOGNhYzUxNjFjNjdlMzM0OTA3YmMiLCJ1c2VySUQiOiJhZG1pbiIsInVzZXJOYW1lIjoiYWRtaW4iLCJpc0FkbWluaXN0cmF0b3IiOnRydWUsImlhdCI6MTY0MDY4MDM0OSwiZXhwIjoxNjQzMjcyMzQ5fQ.4DAOoqM6F17GNbyWg5G6jwnW9RCyRS99OnUfiPygWB4
+
+### list thread from user manfred (if exist) but only admin has access
+POST http://localhost:8080/forum/getByOwnerID
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIzOGNhYzUxNjFjNjdlMzM0OTA3YmMiLCJ1c2VySUQiOiJhZG1pbiIsInVzZXJOYW1lIjoiYWRtaW4iLCJpc0FkbWluaXN0cmF0b3IiOnRydWUsImlhdCI6MTY0MDY4MDM0OSwiZXhwIjoxNjQzMjcyMzQ5fQ.4DAOoqM6F17GNbyWg5G6jwnW9RCyRS99OnUfiPygWB4
+Content-Type: application/json
+
+{
+    "ownerID" : "manfred"
+}
+

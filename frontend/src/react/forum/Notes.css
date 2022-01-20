@@ -1,0 +1,8 @@
+.note_form {
+    display: flex;
+    margin-top: 20px;
+}
+
+.note_input {
+    flex: 1;
+}
